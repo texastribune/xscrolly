@@ -62,13 +62,13 @@
       this.one($active);
     }
     console.log("change", $active)
-    this.options.change && this.options.change($active);
+    this.options.change && this.options.change.call(this, $active);
   };
 
   // when target changes the first time
   XScrollY.prototype.one = function ($active) {
     console.log("one", $active)
-    this.options.one && this.options.one($active);
+    this.options.one && this.options.one.call(this, $active);
   };
 
   $.fn.xscrolly = function(options) {
