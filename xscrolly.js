@@ -61,7 +61,7 @@
   };
 
   // when target changes
-  XScrollY.prototype.change = function ($active) {
+  XScrollY.prototype.change = function($active) {
     if (_.indexOf(this._seen, $active[0]) == -1) {
       this._seen.push($active[0]);
       this.one($active);
@@ -71,10 +71,34 @@
   };
 
   // when target changes the first time
-  XScrollY.prototype.one = function ($active) {
+  XScrollY.prototype.one = function($active) {
     console.log("one", $active)
     this.options.one && this.options.one.call(this, $active);
   };
+
+
+  // helpers to get elements based purely on internally stored offsets
+
+  // get all targets visible on screen
+  XScrollY.prototype.visible = function(localOffset) {
+    localOffset = localOffset || 0;
+    var i = 0, n = this.offsets.length,
+        $ret = $(),
+        scrollTop = this.$scrollElement.scrollTop(),
+        scrollBottom = this.$scrollElement.height(),
+        off;
+    for (; i < n; ++i) {
+      off = this.offsets[i] + this.options.offset + localOffset;  // TODO math
+      if (scrollTop < off && off < scrollBottom) {
+        $ret = $ret.add(this.$targets[i]);
+      }
+    }
+    return $ret;
+  };
+
+  // get all targets above
+
+  // get all targets below
 
 
   // jQuery plugin
