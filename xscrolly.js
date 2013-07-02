@@ -89,6 +89,11 @@
   // helpers to get elements based purely on internally stored offsets
 
   // get all targets visible on screen
+  //
+  // arguments:
+  //
+  // *  localOffset    (default: 0) shift the viewport down this many pixels.
+  //                   Useful if you need to counter a global offset.
   XScrollY.prototype.visible = function(localOffset) {
     localOffset = localOffset || 0;
     var i = 0, n = this.offsets.length,
@@ -97,7 +102,7 @@
         scrollBottom = scrollTop + this.$scrollElement.height(),
         off;
     for (; i < n; ++i) {
-      off = this.offsets[i] + this.options.offset + localOffset;  // TODO math
+      off = this.offsets[i] + this.options.offset + localOffset;
       if (scrollTop < off && off < scrollBottom) {
         $ret = $ret.add(this.$targets[i]);
       }
