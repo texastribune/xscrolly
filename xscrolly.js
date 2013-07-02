@@ -66,16 +66,25 @@
       this._seen.push($active[0]);
       this.one($active);
     }
-    console.log("change", $active)
+    // console.log("change", $active)
     this.options.change && this.options.change.call(this, $active);
   };
 
   // when target changes the first time
   XScrollY.prototype.one = function($active) {
-    console.log("one", $active)
+    // console.log("one", $active)
     this.options.one && this.options.one.call(this, $active);
   };
 
+
+  // METHODS
+
+  XScrollY.prototype.disable = function() {
+    // TODO
+  };
+  XScrollY.prototype.enable = function() {
+    // TODO
+  };
 
   // helpers to get elements based purely on internally stored offsets
 
@@ -85,7 +94,7 @@
     var i = 0, n = this.offsets.length,
         $ret = $(),
         scrollTop = this.$scrollElement.scrollTop(),
-        scrollBottom = this.$scrollElement.height(),
+        scrollBottom = scrollTop + this.$scrollElement.height(),
         off;
     for (; i < n; ++i) {
       off = this.offsets[i] + this.options.offset + localOffset;  // TODO math
