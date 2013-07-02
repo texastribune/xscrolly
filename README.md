@@ -65,8 +65,9 @@ Can also be used as a jQuery plugin:
 And the instance can be found on $(el).data('xscrolly');
 
 
-## Live Demo
+## Live Demos
 
 * http://texastribune.github.io/xscrolly/examples/basic.html
-* http://texastribune.github.io/xscrolly/examples/offset.html
 * http://texastribune.github.io/xscrolly/examples/lazyimg.html
+* http://texastribune.github.io/xscrolly/examples/offset.html
+* http://texastribune.github.io/xscrolly/examples/spy.html
