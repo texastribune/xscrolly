@@ -47,6 +47,15 @@ Scroll has changed focus from one element to another for the first time.
 * `active`: The currently active element
 
 
+## Methods
+
+These are methods you can use on `this` inside the event callbacks:
+
+* `visible(offset, bleed)`: Get the targets visible on screen
+* `above(offset, bleed)`: Get the targets above the top of the screen
+* `below(offset, bleed)`: Get the elements below the top of the screen
+
+
 ## jquery.xscrolly
 
 Can also be used as a jQuery plugin:

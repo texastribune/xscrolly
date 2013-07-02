@@ -86,7 +86,23 @@
     // TODO
   };
 
-  // helpers to get elements based purely on internally stored offsets
+  // HELPER METHODS
+  //
+  // to get elements based purely on internally stored offsets
+
+  // get elements between `top` and `bottom` scroll depth.
+  XScrollY.prototype.slice = function(top, bottom) {
+    var i = 0, n = this.offsets.length,
+        $ret = $(),
+        off;
+    for (; i < n; ++i) {
+      off = this.offsets[i];
+      if (top < off && off < bottom) {
+        $ret = $ret.add(this.$targets[i]);
+      }
+    }
+    return $ret;
+  };
 
   // get all targets visible on screen
   //
@@ -100,25 +116,30 @@
   XScrollY.prototype.visible = function(localOffset, bleed) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
-    var i = 0, n = this.offsets.length,
-        $ret = $(),
-        scrollTop = this.$scrollElement.scrollTop(),
-        scrollBottom = scrollTop + this.$scrollElement.height(),
-        off;
-    scrollTop -= bleed;
-    scrollBottom += bleed;
-    for (; i < n; ++i) {
-      off = this.offsets[i] + this.options.offset + localOffset;
-      if (scrollTop < off && off < scrollBottom) {
-        $ret = $ret.add(this.$targets[i]);
-      }
-    }
-    return $ret;
+    var scrollTop = this.$scrollElement.scrollTop(),
+        scrollBottom = scrollTop + this.$scrollElement.height();
+    return this.slice(scrollTop + this.options.offset + localOffset - bleed,
+        scrollBottom + this.options.offset + localOffset + bleed);
   };
 
   // get all targets above
+  XScrollY.prototype.above = function(localOffset, bleed) {
+    localOffset = localOffset || 0;
+    bleed = bleed || 0;
+    var origin = this.$scrollElement.scrollTop();
+    return this.slice(0,
+        origin + this.options.offset + localOffset + bleed);
+  };
 
   // get all targets below
+  XScrollY.prototype.below = function(localOffset, bleed) {
+    localOffset = localOffset || 0;
+    bleed = bleed || 0;
+    var origin = this.$scrollElement.scrollTop();
+    return this.slice(origin + this.options.offset + localOffset - bleed,
+      Infinity);
+  };
+
 
 
   // jQuery plugin
