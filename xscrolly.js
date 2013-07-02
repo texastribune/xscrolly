@@ -92,15 +92,21 @@
   //
   // arguments:
   //
-  // *  localOffset    (default: 0) shift the viewport down this many pixels.
-  //                   Useful if you need to counter a global offset.
-  XScrollY.prototype.visible = function(localOffset) {
+  //   localOffset    (default: 0) shift the viewport down this many pixels.
+  //                  Useful if you need to counter a global offset.
+  //   bleed          (default: 0) Extend the viewport this many pixels. Just
+  //                  like how bleed works in print.
+  //
+  XScrollY.prototype.visible = function(localOffset, bleed) {
     localOffset = localOffset || 0;
+    bleed = bleed || 0;
     var i = 0, n = this.offsets.length,
         $ret = $(),
         scrollTop = this.$scrollElement.scrollTop(),
         scrollBottom = scrollTop + this.$scrollElement.height(),
         off;
+    scrollTop -= bleed;
+    scrollBottom += bleed;
     for (; i < n; ++i) {
       off = this.offsets[i] + this.options.offset + localOffset;
       if (scrollTop < off && off < scrollBottom) {
