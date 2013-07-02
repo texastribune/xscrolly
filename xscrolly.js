@@ -9,6 +9,7 @@
 
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
+    offset: 0,           // pixels from the top of the page to set origin
     targets: 'section',  // selector for the targets
     throttle: 200
   };
@@ -23,6 +24,7 @@
     // TODO assert offets are monotonic increasing
     this.$scrollElement.on('scroll',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
+    this.process();
   }
 
   // because target positions keep changing
@@ -31,7 +33,7 @@
   };
 
   XScrollY.prototype.getActive = function() {
-    var scrollTop = this.$scrollElement.scrollTop(),
+    var scrollTop = this.$scrollElement.scrollTop() + this.options.offset,
         i = 1, n = this.offsets.length;
     if (scrollTop < this.offsets[0]) {
       return this.$targets.eq(0);
