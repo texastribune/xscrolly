@@ -70,4 +70,10 @@
     console.log("one", $active)
     this.options.one && this.options.one($active);
   };
+
+  $.fn.xscrolly = function(options) {
+    options.targets = this;
+    new XScrollY(options);
+    return this;
+  };
 // });
