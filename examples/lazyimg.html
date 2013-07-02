@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lazy Load Images</title>
+    <link rel="stylesheet" href="examples.css">
+  </head>
+  <body>
+    <h1>Lazy Load Images</h1>
+    <section>
+      <h2>
+        Make your own <a href="https://github.com/luis-almeida/unveil">jquery.unveil</a>.
+      </h2>
+      <p>
+        Sort of...
+      </p>
+      <p>
+        <img data-src="http://placekitten.com/200/300" width=200 height=300
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII%3D">
+        <img data-src="http://placekitten.com/400/400" width=400 height=400
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII%3D">
+        <img data-src="http://placekitten.com/300/400" width=300 height=400
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII%3D">
+        <img data-src="http://placekitten.com/340/340" width=340 height=340
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII%3D">
+        </p>
+
+    </section>
+
+
+    <style class="xray" contenteditable="true">
+img {
+  background: #ccc;
+  display: block;
+  margin: 1em 0;
+}
+    </style>
+    <!-- use schema to support loading from file:// -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="../xscrolly.js"></script>
+    <script class="xray">
+$('img').xscrolly({
+  offset: $(window).height() / 4,
+  one: function($el) {
+    $el.prop('src', $el.attr('data-src'));
+  }
+});
+    </script>
+  </body>
+</html>
+
