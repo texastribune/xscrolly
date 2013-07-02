@@ -1,5 +1,5 @@
 // alpha scroll event hook
-// XScrollY: When X gets scrolled to... do Y
+// XScrollY: When X gets scrolled... do Y
 // Set up a notification for when targets get scrolled to (top of the viewport).
 // Trying to follow this scrollspy implementation as a rough guide:
 // https://github.com/twitter/bootstrap/blob/master/js/bootstrap-scrollspy.js
@@ -9,10 +9,10 @@
 
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
-    alwaysRefresh: false,
-    offset: 0,           // pixels from the top of the page to set origin
-    targets: 'section',  // selector for the targets
-    throttle: 200
+    alwaysRefresh: false,  // force script to re-calculate offsets every time
+    offset: 0,             // pixels from the top of the page to set origin
+    targets: 'section',    // selector for the targets (standalone)
+    throttle: 200          // milliseconds to de-bounce the scroll event
   };
 
   function XScrollY(options) {
