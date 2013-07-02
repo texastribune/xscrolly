@@ -4,6 +4,9 @@
 // Trying to follow this scrollspy implementation as a rough guide:
 // https://github.com/twitter/bootstrap/blob/master/js/bootstrap-scrollspy.js
 //
+
+/*jshint expr:true*/
+
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
     targets: 'section',  // selector for the targets
@@ -57,10 +60,12 @@
       this.one($active);
     }
     console.log("change", $active)
+    this.options.change && this.options.change($active);
   };
 
   // when target changes the first time
   XScrollY.prototype.one = function ($active) {
     console.log("one", $active)
+    this.options.one && this.options.one($active);
   };
 // });

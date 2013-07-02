@@ -5,3 +5,30 @@ body {
 section {
   margin: 2em 0;
 }
+
+.xray {
+  background: #eeeeee;
+  display: block;
+  font-family: monospace;
+  margin: 2em 0;
+  white-space: pre; }
+.xray:before {
+  display: block;
+  font-weight: bold;
+}
+.xray:after {
+  display: block;
+  font-weight: bold;
+}
+script.xray:before {
+  content: "<script>";
+}
+script.xray:after {
+  content: "</script>";
+}
+style.xray:before {
+  content: "<style>";
+}
+style.xray:after {
+  content: "</style>";
+}
