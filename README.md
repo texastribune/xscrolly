@@ -41,3 +41,10 @@ Can also be used as a jQuery plugin:
     $('section').xscrolly();
 
 And the instance can be found on $(el).data('xscrolly');
+
+
+## Live Demo
+
+* http://texastribune.github.io/xscrolly/examples/basic.html
+* http://texastribune.github.io/xscrolly/examples/offset.html
+* http://texastribune.github.io/xscrolly/examples/lazyimg.html
