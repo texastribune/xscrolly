@@ -23,7 +23,7 @@
     this.$targets = $(this.options.targets);
     this.offsets = this.$targets.map(function() { return $(this).position().top; });
     // TODO assert offets are monotonic increasing
-    this.$scrollElement.on('scroll',
+    this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
   }
@@ -81,10 +81,12 @@
 
   XScrollY.prototype.disable = function() {
     // TODO
+    this.$scrollElement.off('.xscrolly');
   };
   XScrollY.prototype.enable = function() {
     // TODO
   };
+
 
   // HELPER METHODS
   //
