@@ -9,6 +9,7 @@
 
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
+    alwaysRefresh: false,
     offset: 0,           // pixels from the top of the page to set origin
     targets: 'section',  // selector for the targets
     throttle: 200
@@ -47,7 +48,9 @@
   };
 
   XScrollY.prototype.process = function() {
-    this.refresh();
+    if (this.options.alwaysRefresh) {
+      this.refresh();
+    }
     var $active = this.getActive();
     if (this.active != $active[0]) {
       this.change($active);
