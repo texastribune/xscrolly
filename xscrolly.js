@@ -140,12 +140,26 @@
       Infinity);
   };
 
+  // set an option: `option('offset', 100)`
+  // set several options: `option({offset: 100, throttle: 1000})`
+  XScrollY.prototype.option = function(key, value) {
+    if (typeof key === 'object' && typeof value === 'undefined') {
+      $.extend(this.options, key);
+    } else {
+      this.options[key] = value;
+    }
+  };
+
 
 
   // jQuery plugin
-  $.fn.xscrolly = function(options) {
-    options.targets = this;
-    this.data('xscrolly', new XScrollY(options));
+  $.fn.xscrolly = function(options, key, value) {
+    if (options === 'option') {
+      this.data('xscrolly').option(key, value);
+    } else {
+      options.targets = this;
+      this.data('xscrolly', new XScrollY(options));
+    }
     return this;
   };
 // });
