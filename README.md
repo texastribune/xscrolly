@@ -29,6 +29,11 @@ Scroll has changed focus from one element to another.
 Scroll has changed focus from one element to another for the first time.
 
 
+## Properties
+
+* `active`: The currently active element
+
+
 ## jquery.xscrolly
 
 Can also be used as a jQuery plugin:
