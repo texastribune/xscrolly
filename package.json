@@ -1,0 +1,23 @@
+{
+  "name": "xscrolly",
+  "version": "0.1.0-dev",
+  "description": "If X gets scrolled... do Y",
+  "main": "xscrolly.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/texastribune/xscrolly.git"
+  },
+  "author": "The Texas Tribune",
+  "license": "Apache",
+  "readmeFilename": "README.md",
+  "gitHead": "378d508baac9e3a051d6ee25906408aa1e2cabf3",
+  "bugs": {
+    "url": "https://github.com/texastribune/xscrolly/issues"
+  }
+}
