@@ -73,7 +73,7 @@
 
   $.fn.xscrolly = function(options) {
     options.targets = this;
-    new XScrollY(options);
+    this.data('xscrolly', new XScrollY(options));
     return this;
   };
 // });
