@@ -28,6 +28,11 @@ Event callbacks have the general function prototype:
 
 Where `$el` is the object in view, `this` is the instance of XScrollY.
 
+Events are fired in this order:
+
+1. `one`
+2. `change`
+
 ### `change`
 
 Scroll has changed focus from one element to another.
