@@ -33,6 +33,7 @@
     this.offsets = this.$targets.map(function() { return $(this).position().top; });
   };
 
+  // Find the *one* element directly above the origin (should it just be one?)
   XScrollY.prototype.getActive = function() {
     var scrollTop = this.$scrollElement.scrollTop() + this.options.offset,
         i = 1, n = this.offsets.length;
@@ -47,6 +48,7 @@
     return this.$targets.eq(n - 1);
   };
 
+  // Callback for the scroll event
   XScrollY.prototype.process = function() {
     if (this.options.alwaysRefresh) {
       this.refresh();
@@ -74,6 +76,8 @@
     this.options.one && this.options.one.call(this, $active);
   };
 
+
+  // jQuery plugin
   $.fn.xscrolly = function(options) {
     options.targets = this;
     this.data('xscrolly', new XScrollY(options));

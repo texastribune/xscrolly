@@ -2,6 +2,14 @@
 
 When `X` gets scrolled... do `Y`.
 
+This was created because there's a general desire to want to do stuff depending
+on the scroll position, and only specific libraries for doing just one thing.
+This library on its own does nothing. You have to give it a set of targets, and
+a callback for what to do. If you have a library that already works, use it. If
+you have a library that doesn't work... you might want to consider adapting it
+to use this underneath so you can write your own code specific to your
+situation.
+
 
 ## Options
 
