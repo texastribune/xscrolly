@@ -102,7 +102,7 @@ $('section').xscrolly({
     var $navItem = $('nav a[href=#' + $el.attr('id') + ']').parent();
     $navItem.addClass('active').siblings('.active').removeClass('active');
   },
-  one: function($el) {
+  unveil: function($el) {
     $el.addClass('read');
   }
 });

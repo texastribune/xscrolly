@@ -16,7 +16,7 @@ situation.
 ```JavaScript
 updateOffsets: 0,      // force script to re-calculate offsets:
                        //   0 (default)   calculate only the first time
-                       //   1             re-calculate after `one`
+                       //   1             re-calculate after `unveil`
                        //   2             re-calculate after `change`
                        //   3             re-calculate every scroll
 offset: 0,             // pixels from the top of the page to set the origin

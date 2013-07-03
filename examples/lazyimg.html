@@ -41,7 +41,7 @@ img {
     <script class="xray">
 $('img').xscrolly({
   offset: $(window).height() / 4,
-  one: function($el) {
+  unveil: function($el) {
     $el.prop('src', $el.attr('data-src'));
   }
 });

@@ -11,7 +11,7 @@
   var defaultOptions = {
     updateOffsets: 0,      // force script to re-calculate offsets:
                            //   0 (default)   calculate only the first time
-                           //   1             re-calculate after `one`
+                           //   1             re-calculate after `unveil`
                            //   2             re-calculate after `change`
                            //   3             re-calculate every scroll
     offset: 0,             // pixels from the top of the page to set the origin
@@ -64,11 +64,14 @@
     }
   };
 
-  // when target changes
+
+  // EVENTS
+
+  // when target scope changes
   XScrollY.prototype.change = function($active) {
     if (_.indexOf(this._seen, $active[0]) == -1) {
       this._seen.push($active[0]);
-      this.one($active);
+      this.unveil($active);
     }
     // console.log("change", $active)
     this.options.change && this.options.change.call(this, $active);
@@ -77,10 +80,10 @@
     }
   };
 
-  // when target changes the first time
-  XScrollY.prototype.one = function($active) {
-    // console.log("one", $active)
-    this.options.one && this.options.one.call(this, $active);
+  // when target scope changes for the first time
+  XScrollY.prototype.unveil = function($active) {
+    // console.log("unveil", $active)
+    this.options.unveil && this.options.unveil.call(this, $active);
     if (this.options.updateOffsets === 1) {
       this.updateOffsets();
     }
