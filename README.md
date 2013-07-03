@@ -14,9 +14,13 @@ situation.
 ## Options
 
 ```JavaScript
-alwaysRefresh: false,  // force script to re-calculate offsets every time
-offset: 0,             // pixels from the top of the page to set origin
-targets: 'section',    // selector for the targets (not used for jquery version)
+updateOffsets: 0,      // force script to re-calculate offsets:
+                       //   0 (default)   calculate only the first time
+                       //   1             re-calculate after `one`
+                       //   2             re-calculate after `change`
+                       //   3             re-calculate every scroll
+offset: 0,             // pixels from the top of the page to set the origin
+targets: 'section',    // selector for the targets
 throttle: 200          // milliseconds to de-bounce the scroll event
 ```
 

@@ -9,9 +9,13 @@
 
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
-    refresh: 0,            // force script to re-calculate offsets every time
-    offset: 0,             // pixels from the top of the page to set origin
-    targets: 'section',    // selector for the targets (standalone)
+    updateOffsets: 0,      // force script to re-calculate offsets:
+                           //   0 (default)   calculate only the first time
+                           //   1             re-calculate after `one`
+                           //   2             re-calculate after `change`
+                           //   3             re-calculate every scroll
+    offset: 0,             // pixels from the top of the page to set the origin
+    targets: 'section',    // selector for the targets
     throttle: 200          // milliseconds to de-bounce the scroll event
   };
 
@@ -50,7 +54,7 @@
 
   // Callback for the scroll event
   XScrollY.prototype.process = function() {
-    if (this.options.alwaysRefresh) {
+    if (this.options.updateOffsets === 3) {
       this.updateOffsets();
     }
     var $active = this.getActive();
@@ -68,12 +72,18 @@
     }
     // console.log("change", $active)
     this.options.change && this.options.change.call(this, $active);
+    if (this.options.updateOffsets === 2) {
+      this.updateOffsets();
+    }
   };
 
   // when target changes the first time
   XScrollY.prototype.one = function($active) {
     // console.log("one", $active)
     this.options.one && this.options.one.call(this, $active);
+    if (this.options.updateOffsets === 1) {
+      this.updateOffsets();
+    }
   };
 
 
