@@ -14,9 +14,12 @@ module.exports = (grunt) ->
       dist:
         files:
           'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+    qunit:
+      all: ['test/*.html']
 
 
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-concat'
+  grunt.loadNpmTasks 'grunt-contrib-qunit'
 
   grunt.registerTask 'default', ['concat', 'uglify']
