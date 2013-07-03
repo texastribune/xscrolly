@@ -10,12 +10,16 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
   <script src="../src/xscrolly.js"></script>
-  <script src="qunit_test.js"></script>
   <style type="text/css">
     #qunit-fixture {
+      left: 0;
+      top: 0;
+      position: relative;
+    }
+    #qunit-fixture ul {
       height: 300px;
       overflow-y: auto;
-      position: static;
+      position: relative;
     }
     #qunit-fixture * {
       margin: 0;
@@ -36,16 +40,17 @@
   <ol id="qunit-tests"></ol>
   <div id="qunit-fixture">
     <ul>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
-      <li>&nbsp;</li>
+      <li>0</li>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
       <li>&nbsp;</li>
       <li>&nbsp;</li>
       <li>&nbsp;</li>
@@ -63,5 +68,6 @@
       <li>&nbsp;</li>
     </ul>
   </div>
+  <script src="qunit_test.js"></script>
 </body>
 </html>
