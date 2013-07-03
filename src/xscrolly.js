@@ -9,7 +9,7 @@
 
 // define(['jquery', 'underscore'], function($, _) {
   var defaultOptions = {
-    alwaysRefresh: false,  // force script to re-calculate offsets every time
+    refresh: 0,            // force script to re-calculate offsets every time
     offset: 0,             // pixels from the top of the page to set origin
     targets: 'section',    // selector for the targets (standalone)
     throttle: 200          // milliseconds to de-bounce the scroll event
@@ -28,8 +28,8 @@
     this.process();
   }
 
-  // because target positions keep changing
-  XScrollY.prototype.refresh = function() {
+  // update target offset lookup
+  XScrollY.prototype.updateOffsets = function() {
     this.offsets = this.$targets.map(function() { return $(this).position().top; });
   };
 
@@ -51,7 +51,7 @@
   // Callback for the scroll event
   XScrollY.prototype.process = function() {
     if (this.options.alwaysRefresh) {
-      this.refresh();
+      this.updateOffsets();
     }
     var $active = this.getActive();
     if (this.active != $active[0]) {
