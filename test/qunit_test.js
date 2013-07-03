@@ -1,12 +1,11 @@
 
-test('basic test', function() {
-  expect(1);
-  ok(true, 'this had better work.');
-});
+test('basic properties are set after init', function() {
+  var xsy = new XScrollY({
+    targets: '#qunit-fixture li'
+  });
 
-
-test('can access the DOM', function() {
-  expect(1);
-  var fixture = document.getElementById('qunit-fixture');
-  equal(fixture.innerHTML, 'this had better work.', 'should be able to access the DOM.');
+  ok(xsy.$scrollElement.length);
+  ok(xsy.$targets.length);
+  equal(xsy.$targets.length, $('#qunit-fixture li').length);
+  equal(xsy.$targets.length, xsy.offsets.length);
 });
