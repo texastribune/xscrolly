@@ -19,5 +19,10 @@
   "gitHead": "378d508baac9e3a051d6ee25906408aa1e2cabf3",
   "bugs": {
     "url": "https://github.com/texastribune/xscrolly/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0"
   }
 }
