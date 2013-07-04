@@ -6,6 +6,7 @@
 // to bypass event handling and callback throttling.
 
 var $container,
+    xsy,
     TARGET_HEIGHT = 20,
     n_changeFired = 0,  // number of times `change` was fired if set up
     countChange = function() { ++n_changeFired; };
@@ -120,13 +121,31 @@ test('unveil is only called once', function() {
   equal(n_unveilFired, 3);
 });
 
-test('visible', function() {
-  var xsy = new XScrollY({
-    container: $container,
-    targets: '#qunit-fixture li'
-  });
 
+module('target selection', {
+  setup: function() {
+    $container = $('#qunit-fixture ul');
+    xsy = new XScrollY({
+      container: $container,
+      targets: '#qunit-fixture li'
+    });
+  }
+});
+
+test('visible', function() {
   equal(xsy.visible().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.visible().text(), '3456789101112');
+});
+
+test('above', function() {
+  equal(xsy.above().text(), '');
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(xsy.above().text(), '012');
+});
+
+test('below', function() {
+  equal(xsy.below().text(), '01234567891011121314151617181920212223242526272829');
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(xsy.below().text(), '34567891011121314151617181920212223242526272829');
 });
