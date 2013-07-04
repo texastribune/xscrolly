@@ -22,8 +22,13 @@
   function XScrollY(options) {
     var self = this;
     this._seen = [];
+    if (options.container) {
+      this.$scrollElement = $(options.container);
+      delete options.container;
+    } else {
+      this.$scrollElement = $(window);
+  }
     this.options = $.extend({}, defaultOptions, options || {});
-    this.$scrollElement = $(window);
     this.$targets = $(this.options.targets);
     this.offsets = this.$targets.map(function() { return $(this).position().top; });
     // TODO assert offets are monotonic increasing
@@ -112,7 +117,7 @@
         off;
     for (; i < n; ++i) {
       off = this.offsets[i];
-      if (top < off && off < bottom) {
+      if (top <= off && off < bottom) {
         $ret = $ret.add(this.$targets[i]);
       }
     }
