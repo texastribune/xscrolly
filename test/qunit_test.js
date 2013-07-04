@@ -89,3 +89,44 @@ test('offset option works', function() {
     "the third target should be active");
   equal(n_changeFired, 1);
 });
+
+test('unveil is only called once', function() {
+  var n_unveilFired = 0;
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li',
+    change: countChange,
+    unveil: function($e) {
+      ++n_unveilFired;
+    }
+  });
+
+  equal(n_changeFired, 1);
+  equal(n_unveilFired, 1);
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(n_changeFired, 2);
+  equal(n_unveilFired, 2);
+  $container.scrollTop(TARGET_HEIGHT * 6); xsy.process();
+  equal(n_changeFired, 3);
+  equal(n_unveilFired, 3);
+  $container.scrollTop(TARGET_HEIGHT * 0); xsy.process();
+  equal(n_changeFired, 4);
+  equal(n_unveilFired, 3);
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(n_changeFired, 5);
+  equal(n_unveilFired, 3);
+  $container.scrollTop(TARGET_HEIGHT * 6); xsy.process();
+  equal(n_changeFired, 6);
+  equal(n_unveilFired, 3);
+});
+
+test('visible', function() {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+
+  equal(xsy.visible().text(), '0123456789');
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(xsy.visible().text(), '3456789101112');
+});

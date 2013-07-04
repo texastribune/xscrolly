@@ -117,7 +117,7 @@
         off;
     for (; i < n; ++i) {
       off = this.offsets[i];
-      if (top < off && off < bottom) {
+      if (top <= off && off < bottom) {
         $ret = $ret.add(this.$targets[i]);
       }
     }
