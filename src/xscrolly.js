@@ -57,6 +57,9 @@
     return this.$targets.eq(n - 1);
   };
 
+
+  // EVENTS
+
   // Callback for the scroll event
   XScrollY.prototype.process = function() {
     if (this.options.updateOffsets === 3) {
@@ -70,29 +73,24 @@
     this.options.scroll && this.options.scroll.call(this, $active);
   };
 
-
-  // EVENTS
-
   // when target scope changes
   XScrollY.prototype.change = function($active) {
+    if (this.options.updateOffsets === 2) {
+      this.updateOffsets();
+    }
     if (_.indexOf(this._seen, $active[0]) == -1) {
       this._seen.push($active[0]);
       this.unveil($active);
     }
-    // console.log("change", $active)
     this.options.change && this.options.change.call(this, $active);
-    if (this.options.updateOffsets === 2) {
-      this.updateOffsets();
-    }
   };
 
   // when target scope changes for the first time
   XScrollY.prototype.unveil = function($active) {
-    // console.log("unveil", $active)
-    this.options.unveil && this.options.unveil.call(this, $active);
     if (this.options.updateOffsets === 1) {
       this.updateOffsets();
     }
+    this.options.unveil && this.options.unveil.call(this, $active);
   };
 
 
