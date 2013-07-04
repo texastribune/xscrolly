@@ -36,14 +36,19 @@ Events are fired in this order:
 
 1. `one`
 2. `change`
+3. `scroll`
+
+### `one`
+
+Scroll has changed focus from one element to another for the first time.
 
 ### `change`
 
 Scroll has changed focus from one element to another.
 
-### `one`
+### `scroll`
 
-Scroll has changed focus from one element to another for the first time.
+Captured a scroll event.
 
 
 ## Properties

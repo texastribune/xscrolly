@@ -67,6 +67,7 @@
       this.change($active);
       this.active = $active[0];
     }
+    this.options.scroll && this.options.scroll.call(this, $active);
   };
 
 

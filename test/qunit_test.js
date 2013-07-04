@@ -57,6 +57,30 @@ test('change event fires twice', function() {
   equal(n_changeFired, 2);
 });
 
+test('scroll', function() {
+  var n_scrollFired = 0;
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li',
+    change: countChange,
+    scroll: function() {
+      ++n_scrollFired;
+    }
+  });
+
+  equal(n_changeFired, 1);
+  equal(n_scrollFired, 1);
+  $container.scrollTop(TARGET_HEIGHT / 2); xsy.process();
+  equal(n_changeFired, 1);
+  equal(n_scrollFired, 2);
+  $container.scrollTop(TARGET_HEIGHT); xsy.process();
+  equal(n_changeFired, 2);
+  equal(n_scrollFired, 3);
+  $container.scrollTop(TARGET_HEIGHT * 3 / 2); xsy.process();
+  equal(n_changeFired, 2);
+  equal(n_scrollFired, 4);
+});
+
 test('active property is updated on scroll', function() {
   var xsy = new XScrollY({
     container: $container,
