@@ -56,8 +56,10 @@ Scroll has changed focus from one element to another for the first time.
 These are methods you can use on `this` inside the event callbacks:
 
 * `visible(offset, bleed)`: Get the targets visible on screen
-* `above(offset, bleed)`: Get the targets above the top of the screen
-* `below(offset, bleed)`: Get the elements below the top of the screen
+* `above(offset, bleed)`: Get the targets above the *top* of the screen
+* `aboves(offset, bleed)`: Get the targets above the *bottom* of the screen
+* `below(offset, bleed)`: Get the elements below the *top* of the screen
+* `belows(offset, bleed)`: Get the elements below the *bottom* of the screen
 
 
 ## jquery.xscrolly

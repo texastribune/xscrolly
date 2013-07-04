@@ -151,12 +151,32 @@
         origin + this.options.offset + localOffset + bleed);
   };
 
+  // get all targets above origin + screen
+  XScrollY.prototype.aboves = function(localOffset, bleed) {
+    localOffset = localOffset || 0;
+    bleed = bleed || 0;
+    var origin = this.$scrollElement.scrollTop(),
+        origins = origin + this.$scrollElement.height();
+    return this.slice(0,
+        origins + this.options.offset + localOffset + bleed);
+  };
+
   // get all targets below
   XScrollY.prototype.below = function(localOffset, bleed) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var origin = this.$scrollElement.scrollTop();
     return this.slice(origin + this.options.offset + localOffset - bleed,
+      Infinity);
+  };
+
+  // get all targets below screen
+  XScrollY.prototype.belows = function(localOffset, bleed) {
+    localOffset = localOffset || 0;
+    bleed = bleed || 0;
+    var origin = this.$scrollElement.scrollTop(),
+        origins = origin + this.$scrollElement.height();
+    return this.slice(origins + this.options.offset + localOffset - bleed,
       Infinity);
   };
 

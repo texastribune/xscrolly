@@ -144,8 +144,20 @@ test('above', function() {
   equal(xsy.above().text(), '012');
 });
 
+test('aboves', function() {
+  equal(xsy.aboves().text(), '0123456789');
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(xsy.aboves().text(), '0123456789101112');
+});
+
 test('below', function() {
   equal(xsy.below().text(), '01234567891011121314151617181920212223242526272829');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.below().text(), '34567891011121314151617181920212223242526272829');
+});
+
+test('belows', function() {
+  equal(xsy.belows().text(), '1011121314151617181920212223242526272829');
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+  equal(xsy.belows().text(), '1314151617181920212223242526272829');
 });
