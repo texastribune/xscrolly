@@ -57,9 +57,30 @@ test('change event fires twice', function() {
   equal(n_changeFired, 2);
 });
 
+test('getActiveOffset', function() {
+  xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  equal(xsy.activeOffset, TARGET_HEIGHT * 0,
+    "Scroll depth: " + $container.scrollTop());
+  $container.scrollTop(TARGET_HEIGHT / 2); xsy.process();
+  equal(xsy.activeOffset, TARGET_HEIGHT * 0,
+    "Scroll depth: " + $container.scrollTop());
+  $container.scrollTop(TARGET_HEIGHT); xsy.process();
+  equal(xsy.activeOffset, TARGET_HEIGHT,
+    "Scroll depth: " + $container.scrollTop());
+  $container.scrollTop(TARGET_HEIGHT * 2 - 1); xsy.process();
+  equal(xsy.activeOffset, TARGET_HEIGHT,
+    "Scroll depth: " + $container.scrollTop());
+  $container.scrollTop(TARGET_HEIGHT * 2 + 1); xsy.process();
+  equal(xsy.activeOffset, TARGET_HEIGHT * 2,
+    "Scroll depth: " + $container.scrollTop());
+});
+
 test('scroll', function() {
   var n_scrollFired = 0;
-  var xsy = new XScrollY({
+  xsy = new XScrollY({
     container: $container,
     targets: '#qunit-fixture li',
     change: countChange,
@@ -82,7 +103,7 @@ test('scroll', function() {
 });
 
 test('active property is updated on scroll', function() {
-  var xsy = new XScrollY({
+  xsy = new XScrollY({
     container: $container,
     targets: '#qunit-fixture li',
     change: countChange

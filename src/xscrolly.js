@@ -30,8 +30,7 @@
   }
     this.options = $.extend({}, defaultOptions, options || {});
     this.$targets = $(this.options.targets);
-    this.offsets = this.$targets.map(function() { return $(this).position().top; });
-    // TODO assert offets are monotonic increasing
+    this.updateOffsets();  // TODO assert offets are monotonic increasing
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
@@ -39,22 +38,36 @@
 
   // update target offset lookup
   XScrollY.prototype.updateOffsets = function() {
-    this.offsets = this.$targets.map(function() { return $(this).position().top; });
+    var self = this;
+    this.offsets = [];
+    this.offsetMap = {};
+    this.$targets.each(function(idx, target) {
+      var offset = $(target).position().top;
+      if (!self.offsetMap[offset]) {
+        self.offsetMap[offset] = [];
+      }
+      self.offsets.push(offset);
+      self.offsetMap[offset].push(target);
+    });
+  };
+
+  // get the active offset for the current scroll depth
+  XScrollY.prototype.getActiveOffset = function() {
+    var scrollTop = this.$scrollElement.scrollTop() + this.options.offset,
+        i = 0, n = this.offsets.length;
+    for (; i < n; ++i) {
+      if (scrollTop < this.offsets[i]) {
+        return this.offsets[Math.max(0, i - 1)];
+      }
+    }
+    return this.offsets[n - 1];
   };
 
   // Find the *one* element directly above the origin (should it just be one?)
   XScrollY.prototype.getActive = function() {
-    var scrollTop = this.$scrollElement.scrollTop() + this.options.offset,
-        i = 1, n = this.offsets.length;
-    if (scrollTop < this.offsets[0]) {
-      return this.$targets.eq(0);
-    }
-    for (; i < n; ++i) {
-      if (scrollTop < this.offsets[i]) {
-        return this.$targets.eq(i - 1);
-      }
-    }
-    return this.$targets.eq(n - 1);
+    var offset = this.getActiveOffset();
+    this.activeOffset = offset;
+    return this.offsetMap[offset];
   };
 
 
