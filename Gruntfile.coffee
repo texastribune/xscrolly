@@ -5,15 +5,19 @@ module.exports = (grunt) ->
     concat:
       options:
         banner: '/* <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      dist:
-        src: ['src/*.js']
+      basic:
+        src: ['src/xscrolly.js']
         dest: 'dist/<%= pkg.name %>.js'
+      jqueryPlugin:
+        src: ['src/xscrolly.js', 'src/jquery-wrapper.js']
+        dest: 'dist/jquery-<%= pkg.name %>.js'
     uglify:
       options:
         banner: '/* <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       dist:
         files:
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'dist/<%= pkg.name %>.min.js': ['<%= concat.basic.dest %>']
+          'dist/jquery-<%= pkg.name %>.min.js': ['<%= concat.jqueryPlugin.dest %>']
     qunit:
       all: ['test/*.html']
 
