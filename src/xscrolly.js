@@ -8,6 +8,9 @@
 /*jshint expr:true*/
 
 // define(['jquery', 'underscore'], function($, _) {
+window.XScrollY = (function($, _) {
+  "use strict";
+
   var defaultOptions = {
     updateOffsets: 0,      // force script to re-calculate offsets:
                            //   0 (default)   calculate only the first time
@@ -222,4 +225,7 @@
       this.options[key] = value;
     }
   };
-// });
+
+  return XScrollY;
+
+})(window.jQuery, window._);
