@@ -1,21 +1,22 @@
 # xscrolly.js
 
-When `X` gets scrolled... do `Y`.
+When `X` scrolls in, do `Y`
 
-This was created because we have a general desire to want to do stuff depending
-on the scroll position, and only found specific libraries for doing specific
-things. This library on its own does nothing. You have to give it a set of
-targets, and a event callbacks for what to do when those targets scroll past. If
-you have a library that already works, use it. If you have a library that
-doesn't work... you might want to consider adapting it to use this underneath so
-you can write your own code specific to your situation.
+This was created because we have a general desire to do stuff depending on the
+scroll position, and only found specific libraries for doing specific things.
+This library does nothing on its own. You have to give it a set of targets, and
+a event callbacks for what to do when those targets scroll past.
+
+If you have a library that already works, use it. If you have a library that
+doesn't work or you find yourself constantly fighting... you might want to
+consider adapting it to use this underneath so you can write your own code.
 
 
 ## Options
 
 ```JavaScript
 // setup options: these can only be set once
-container: window,     // scroll container, should also be an offset parent
+container: window,     // selector for scroll container, should also be an offset parent
 targets: 'section',    // selector for the targets
 
 // configuration options

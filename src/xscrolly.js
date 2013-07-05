@@ -6,7 +6,7 @@ window.XScrollY = (function($, _) {
 
   var defaultOptions = {
     // setup options: these can only be set once
-    container: window,     // scroll container, should also be an offset parent
+    container: window,     // selector for scroll container, should also be an offset parent
     targets: 'section',    // selector for the targets
 
     // configuration options
