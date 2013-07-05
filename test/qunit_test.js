@@ -177,6 +177,12 @@ module('target selection', {
   }
 });
 
+test('slice -  slicing at the limits returns all', function() {
+  total = xsy.$targets.length;
+  equal(xsy.slice(-Infinity, Infinity).length, total);
+  equal(xsy.slice(0, Infinity).length, total);
+});
+
 test('visible', function() {
   equal(xsy.visible().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
