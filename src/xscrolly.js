@@ -126,13 +126,15 @@
 
   // get elements between `top` and `bottom` scroll depth.
   XScrollY.prototype.slice = function(top, bottom) {
-    var i = 0, n = this.offsets.length,
+    var offsets = this.offsets,
+        offsetMap = this.offsetMap;
+    var i = 0, n = offsets.length,
         $ret = $(),
         off;
     for (; i < n; ++i) {
-      off = this.offsets[i];
+      off = offsets[i];
       if (top <= off && off < bottom) {
-        $ret = $ret.add(this.offsetMap[off]);
+        $ret = $ret.add(offsetMap[off]);
       }
     }
     return $ret;
