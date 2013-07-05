@@ -26,4 +26,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-qunit'
 
-  grunt.registerTask 'default', ['concat', 'uglify']
+  grunt.registerTask 'default', ['qunit', 'concat', 'uglify']
