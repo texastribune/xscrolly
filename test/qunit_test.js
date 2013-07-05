@@ -159,7 +159,7 @@ module('target selection', {
 test('visible', function() {
   equal(xsy.visible().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
-  equal(xsy.visible().text(), '3456789101112');
+  equal(xsy.visible().text(), '3456789ABC');
 });
 
 test('above', function() {
@@ -171,17 +171,17 @@ test('above', function() {
 test('aboves', function() {
   equal(xsy.aboves().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
-  equal(xsy.aboves().text(), '0123456789101112');
+  equal(xsy.aboves().text(), '0123456789ABC');
 });
 
 test('below', function() {
-  equal(xsy.below().text(), '01234567891011121314151617181920212223242526272829');
+  equal(xsy.below().text(), '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
-  equal(xsy.below().text(), '34567891011121314151617181920212223242526272829');
+  equal(xsy.below().text(), '3456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 });
 
 test('belows', function() {
-  equal(xsy.belows().text(), '1011121314151617181920212223242526272829');
+  equal(xsy.belows().text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
-  equal(xsy.belows().text(), '1314151617181920212223242526272829');
+  equal(xsy.belows().text(), 'DEFGHIJKLMNOPQRSTUVWXYZ');
 });
