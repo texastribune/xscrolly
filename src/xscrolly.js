@@ -29,6 +29,10 @@ window.XScrollY = (function($, _) {
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
+    // TODO move this around? If it's inside `process` we have to branch inside
+    // an event handler, which is almost as bad as a branch inside a loop. If
+    // it's above `process` then we don't know what's active.
+    this.options.start && this.options.start.call(this, this.$active);
   }
 
   // update the offsets cache and offset-to-target map, passed in by reference.

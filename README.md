@@ -46,6 +46,7 @@ Events are fired in this order:
 1. `unveil`
 2. `change`
 3. `scroll`
+4. `start`
 
 ### `unveil`
 
@@ -81,6 +82,17 @@ scroll event listener, you can use this. Example:
 // decorate all visible images
 function($el) {
   this.visible($('img')).css('border', '1px solid #' + Math.floor(Math.random() * 16777215).toString(16));
+}
+```
+
+### `start`
+
+Like an unveil for unveil. This is run the very first time. Example:
+
+```JavaScript
+// outline all elements on the first screen
+function($el) {
+  this.visible($('*')).css('outline', '1px solid chartreuse');
 }
 ```
 

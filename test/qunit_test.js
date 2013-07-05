@@ -166,6 +166,20 @@ test('unveil is only called once', function() {
   equal(n_unveilFired, 3);
 });
 
+test('start', function() {
+  var startActive;
+  xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li',
+    start: function($el) {
+      startActive = $el;
+      this.visible().html('x');
+    }
+  });
+  equal(startActive[0], xsy.$targets[0]);  // This may change in the future.
+  equal(xsy.$targets.text(), 'xxxxxxxxxxABCDEFGHIJKLMNOPQRSTUVWXYZ');
+});
+
 test('event callback args', function() {
   var changeActive, changeOldActive,
       unveilActive, unveilOldActive,
