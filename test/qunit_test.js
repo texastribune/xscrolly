@@ -221,3 +221,13 @@ test('belows', function() {
   equal(xsy.belows(TARGET_HEIGHT * 2).text(), 'FGHIJKLMNOPQRSTUVWXYZ');
   equal(xsy.belows(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), 'EFGHIJKLMNOPQRSTUVWXYZ');
 });
+
+test('slice with custom targets', function() {
+  // using .visible
+
+  equal(xsy.visible().text(), '0123456789');
+  equal(xsy.visible(0).text(), '0123456789');
+  equal(xsy.visible(0, 0, xsy.$targets).text(), '0123456789');
+  equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(odd)')).text(), '02468');
+  equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(even)')).text(), '13579');
+});

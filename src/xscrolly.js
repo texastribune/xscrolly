@@ -30,25 +30,30 @@
   }
     this.options = $.extend({}, defaultOptions, options || {});
     this.$targets = $(this.options.targets);
-    this.updateOffsets();  // TODO assert offets are monotonic increasing
+    this.updateOffsets();  // TODO assert offsets are monotonic increasing
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
   }
+
+  // update the offsets cache and offset-to-target map, passed in by reference.
+  XScrollY.prototype._updateOffsets = function($target, _offsets, _map) {
+    $target.each(function(idx, target) {
+      var offset = $(target).position().top;
+      if (!_map[offset]) {
+        _map[offset] = [];
+      }
+      _offsets.push(offset);
+      _map[offset].push(target);
+    });
+  };
 
   // update target offset lookup
   XScrollY.prototype.updateOffsets = function() {
     var self = this;
     this.offsets = [];
     this.offsetMap = {};
-    this.$targets.each(function(idx, target) {
-      var offset = $(target).position().top;
-      if (!self.offsetMap[offset]) {
-        self.offsetMap[offset] = [];
-      }
-      self.offsets.push(offset);
-      self.offsetMap[offset].push(target);
-    });
+    this._updateOffsets(this.$targets, this.offsets, this.offsetMap);
   };
 
   // get the active offset for the current scroll depth
@@ -125,14 +130,21 @@
   // to get elements based purely on internally stored offsets
 
   // get elements between `top` and `bottom` scroll depth.
-  XScrollY.prototype.slice = function(top, bottom) {
-    var i = 0, n = this.offsets.length,
+  XScrollY.prototype.slice = function(top, bottom, $target) {
+    var offsets = this.offsets,
+        offsetMap = this.offsetMap;
+    if ($target) {
+      offsets = [];
+      offsetMap = {};
+      this._updateOffsets($target, offsets, offsetMap);
+    }
+    var i = 0, n = offsets.length,
         $ret = $(),
         off;
     for (; i < n; ++i) {
-      off = this.offsets[i];
+      off = offsets[i];
       if (top <= off && off < bottom) {
-        $ret = $ret.add(this.offsetMap[off]);
+        $ret = $ret.add(offsetMap[off]);
       }
     }
     return $ret;
@@ -146,52 +158,58 @@
   //                  Useful if you need to counter a global offset.
   //   bleed          (default: 0) Extend the viewport this many pixels. Just
   //                  like how bleed works in print.
+  //   $targets       (default: undefined) Use a custom set of targets.
   //
-  XScrollY.prototype.visible = function(localOffset, bleed) {
+  XScrollY.prototype.visible = function(localOffset, bleed, $targets) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var scrollTop = this.$scrollElement.scrollTop(),
         scrollBottom = scrollTop + this.$scrollElement.height();
     return this.slice(scrollTop + this.options.offset + localOffset - bleed,
-        scrollBottom + this.options.offset + localOffset + bleed);
+        scrollBottom + this.options.offset + localOffset + bleed,
+        $targets);
   };
 
   // get all targets above
-  XScrollY.prototype.above = function(localOffset, bleed) {
+  XScrollY.prototype.above = function(localOffset, bleed, $targets) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var origin = this.$scrollElement.scrollTop();
     return this.slice(0,
-        origin + this.options.offset + localOffset + bleed);
+        origin + this.options.offset + localOffset + bleed,
+        $targets);
   };
 
   // get all targets above origin + screen
-  XScrollY.prototype.aboves = function(localOffset, bleed) {
+  XScrollY.prototype.aboves = function(localOffset, bleed, $targets) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(0,
-        origins + this.options.offset + localOffset + bleed);
+        origins + this.options.offset + localOffset + bleed,
+        $targets);
   };
 
   // get all targets below
-  XScrollY.prototype.below = function(localOffset, bleed) {
+  XScrollY.prototype.below = function(localOffset, bleed, $targets) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var origin = this.$scrollElement.scrollTop();
     return this.slice(origin + this.options.offset + localOffset - bleed,
-      Infinity);
+      Infinity,
+      $targets);
   };
 
   // get all targets below screen
-  XScrollY.prototype.belows = function(localOffset, bleed) {
+  XScrollY.prototype.belows = function(localOffset, bleed, $targets) {
     localOffset = localOffset || 0;
     bleed = bleed || 0;
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(origins + this.options.offset + localOffset - bleed,
-      Infinity);
+      Infinity,
+      $targets);
   };
 
   // set an option: `option('offset', 100)`
