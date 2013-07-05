@@ -30,7 +30,7 @@ window.XScrollY = (function($, _) {
       delete options.container;
     } else {
       this.$scrollElement = $(window);
-  }
+    }
     this.options = $.extend({}, defaultOptions, options || {});
     this.$targets = $(this.options.targets);
     this.updateOffsets();

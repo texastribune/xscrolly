@@ -231,3 +231,27 @@ test('slice with custom targets', function() {
   equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(odd)')).text(), '02468');
   equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(even)')).text(), '13579');
 });
+
+
+module('multiple columns', {
+  setup: function() {
+    $container = $('#qunit-fixture ul');
+    $('#qunit-fixture li').css({
+      float: 'left',
+      width: '50%'
+    });
+    xsy = new XScrollY({
+      container: $container,
+      targets: '#qunit-fixture li'
+    });
+  }
+});
+
+test('$active is multiple elements', function() {
+  equal(xsy.$active.text(), '01');
+  $container.scrollTop(TARGET_HEIGHT * 2); xsy.process();
+  equal(xsy.$active.text(), '45');
+  equal(xsy.above().text(), '0123');
+  equal(xsy.visible().text(), '456789ABCDEFGHIJKLMN');
+  equal(xsy.belows().text(), 'OPQRSTUVWXYZ');
+});
