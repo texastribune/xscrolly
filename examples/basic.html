@@ -69,7 +69,7 @@
     <script class="xray">
 $('section').xscrolly({
   change: function($el) {
-    $(this.active).removeClass('active');
+    this.$active.removeClass('active');
     $el.addClass('active');
   },
   unveil: function($el) {
