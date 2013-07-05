@@ -23,7 +23,7 @@ test('basic properties are set after init', function() {
 });
 
 
-module('todo', {
+module('basics', {
   setup: function() {
     n_changeFired = 0;
     $container = $('#qunit-fixture ul');
@@ -39,7 +39,7 @@ test('change event fires', function() {
 
   equal(xsy.$scrollElement.scrollTop(), 0,
     "container should start scrolled to the top");
-  equal(xsy.active, xsy.$targets[0],
+  equal(xsy.$active[0], xsy.$targets[0],
     "the first target should be active");
   $container.scrollTop(TARGET_HEIGHT * 3);
   equal(xsy.$scrollElement.scrollTop(), TARGET_HEIGHT * 3);
@@ -111,10 +111,10 @@ test('active property is updated on scroll', function() {
 
   equal(xsy.$scrollElement.scrollTop(), 0,
     "container should start scrolled to the top");
-  equal(xsy.active, xsy.$targets[0],
+  equal(xsy.$active[0], xsy.$targets[0],
     "the first target should be active");
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
-  equal(xsy.active.innerHTML, xsy.$targets[3].innerHTML,
+  equal(xsy.$active[0].innerHTML, xsy.$targets[3].innerHTML,
     "the third target should be active");
   equal(n_changeFired, 2);
 });
@@ -131,7 +131,7 @@ test('offset option works', function() {
     "TARGET_HEIGHT variable should be the same as <li> height for testing");
   equal(xsy.$scrollElement.scrollTop(), 0,
     "container should start scrolled to the top");
-  equal(xsy.active.innerHTML, xsy.$targets[3].innerHTML,
+  equal(xsy.$active[0].innerHTML, xsy.$targets[3].innerHTML,
     "the third target should be active");
   equal(n_changeFired, 1);
 });

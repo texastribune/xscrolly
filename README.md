@@ -53,7 +53,7 @@ Captured a scroll event.
 
 ## Properties
 
-* `active`: The currently active element
+* `$active`: The currently active element(s)
 
 
 ## Methods

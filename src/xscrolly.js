@@ -63,11 +63,12 @@
     return this.offsets[n - 1];
   };
 
-  // Find the *one* element directly above the origin (should it just be one?)
+  // Find target(s) directly above the origin. If there are multiple targets at
+  // the same vertical position, return all of them.
   XScrollY.prototype.getActive = function() {
     var offset = this.getActiveOffset();
     this.activeOffset = offset;
-    return this.offsetMap[offset];
+    return $(this.offsetMap[offset]);
   };
 
 
@@ -78,10 +79,11 @@
     if (this.options.updateOffsets === 3) {
       this.updateOffsets();
     }
-    var $active = this.getActive();
-    if (this.active != $active[0]) {
+    var oldActiveOffset = this.activeOffset,
+        $active = this.getActive();  // this.activeOffset gets set in here :(
+    if (this.activeOffset != oldActiveOffset) {
       this.change($active);
-      this.active = $active[0];
+      this.$active = $active;
     }
     this.options.scroll && this.options.scroll.call(this, $active);
   };
