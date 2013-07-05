@@ -66,6 +66,8 @@ These are methods you can use on `this` inside the event callbacks:
 * `below(offset, bleed)`: Get the elements below the *top* of the screen
 * `belows(offset, bleed)`: Get the elements below the *bottom* of the screen
 
+You can also pass in a custom set of targets as the third argument.
+
 
 ## jquery.xscrolly
 
