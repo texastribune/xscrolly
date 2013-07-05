@@ -157,8 +157,16 @@ window.XScrollY = (function($, _) {
   //   $targets       (default: undefined) Use a custom set of targets.
   //
   XScrollY.prototype.visible = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var scrollTop = this.$scrollElement.scrollTop(),
         scrollBottom = scrollTop + this.$scrollElement.height();
     return this.slice(scrollTop + this.options.offset + localOffset - bleed,
@@ -168,8 +176,15 @@ window.XScrollY = (function($, _) {
 
   // get all targets above
   XScrollY.prototype.above = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
     var origin = this.$scrollElement.scrollTop();
     return this.slice(0,
         origin + this.options.offset + localOffset + bleed,
@@ -178,8 +193,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets above origin + screen
   XScrollY.prototype.aboves = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(0,
@@ -189,8 +212,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets below
   XScrollY.prototype.below = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop();
     return this.slice(origin + this.options.offset + localOffset - bleed,
       Infinity,
@@ -199,8 +230,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets below screen
   XScrollY.prototype.belows = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(origins + this.options.offset + localOffset - bleed,

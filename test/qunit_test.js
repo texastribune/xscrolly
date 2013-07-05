@@ -262,6 +262,8 @@ test('slice with custom targets', function() {
   equal(xsy.visible(0, 0, xsy.$targets).text(), '0123456789');
   equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(odd)')).text(), '02468');
   equal(xsy.visible(0, 0, xsy.$targets.filter(':nth-child(even)')).text(), '13579');
+  // shortcut syntax
+  equal(xsy.visible(xsy.$targets).text(), '0123456789');
 });
 
 

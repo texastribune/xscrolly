@@ -79,7 +79,7 @@ scroll event listener, you can use this. Example:
 ```JavaScript
 // decorate all visible images
 function($el) {
-  this.visible(0, 0, $('img')).css('border', '1px solid #' + Math.floor(Math.random() * 16777215).toString(16));
+  this.visible($('img')).css('border', '1px solid #' + Math.floor(Math.random() * 16777215).toString(16));
 }
 ```
 
@@ -104,6 +104,16 @@ Arguments:
   1. `offset`    Fudge the origin this many pixels down, stacks with `offset` option.
   2. `bleed`     Fudge the boundaries out this many pixels.
   3. `$targets`  Don't use the internal targets, define a new set.
+
+Usage:
+
+```JavaScript
+visible();
+visible(offset);
+visible(offset, bleed);
+visible(offset, bleed, $targets);
+visible($targets);
+```
 
 
 ## jquery-xscrolly.sj
