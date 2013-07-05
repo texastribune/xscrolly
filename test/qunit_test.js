@@ -160,28 +160,43 @@ test('visible', function() {
   equal(xsy.visible().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.visible().text(), '3456789ABC');
+
+  equal(xsy.visible(TARGET_HEIGHT * 2).text(), '56789ABCDE');
+  equal(xsy.visible(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), '456789ABCDEF');
 });
 
 test('above', function() {
   equal(xsy.above().text(), '');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.above().text(), '012');
+
+  equal(xsy.above(TARGET_HEIGHT * 2).text(), '01234');
+  equal(xsy.above(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), '012345');
 });
 
 test('aboves', function() {
   equal(xsy.aboves().text(), '0123456789');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.aboves().text(), '0123456789ABC');
+
+  equal(xsy.aboves(TARGET_HEIGHT * 2).text(), '0123456789ABCDE');
+  equal(xsy.aboves(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), '0123456789ABCDEF');
 });
 
 test('below', function() {
   equal(xsy.below().text(), '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.below().text(), '3456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+  equal(xsy.below(TARGET_HEIGHT * 2).text(), '56789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  equal(xsy.below(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), '456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 });
 
 test('belows', function() {
   equal(xsy.belows().text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.belows().text(), 'DEFGHIJKLMNOPQRSTUVWXYZ');
+
+  equal(xsy.belows(TARGET_HEIGHT * 2).text(), 'FGHIJKLMNOPQRSTUVWXYZ');
+  equal(xsy.belows(TARGET_HEIGHT * 2, TARGET_HEIGHT).text(), 'EFGHIJKLMNOPQRSTUVWXYZ');
 });
