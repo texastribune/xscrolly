@@ -1,11 +1,4 @@
-/* xscrolly - v0.2.1 - 2013-07-05 */
-// alpha scroll event hook
-// XScrollY: When X gets scrolled... do Y
-// Set up a notification for when targets get scrolled to (top of the viewport).
-// Trying to follow this scrollspy implementation as a rough guide:
-// https://github.com/twitter/bootstrap/blob/master/js/bootstrap-scrollspy.js
-//
-
+/* xscrolly - v0.3.0 - 2013-07-05 */
 /*jshint expr:true*/
 
 // define(['jquery', 'underscore'], function($, _) {
@@ -13,31 +6,34 @@ window.XScrollY = (function($, _) {
   "use strict";
 
   var defaultOptions = {
+    // setup options: these can only be set once
+    container: window,     // selector for scroll container, should also be an offset parent
+    targets: 'section',    // selector for the targets
+
+    // configuration options
     updateOffsets: 0,      // force script to re-calculate offsets:
                            //   0 (default)   calculate only the first time
                            //   1             re-calculate after `unveil`
                            //   2             re-calculate after `change`
                            //   3             re-calculate every scroll
     offset: 0,             // pixels from the top of the page to set the origin
-    targets: 'section',    // selector for the targets
     throttle: 200          // milliseconds to de-bounce the scroll event
   };
 
   function XScrollY(options) {
     var self = this;
     this._seen = [];
-    if (options.container) {
-      this.$scrollElement = $(options.container);
-      delete options.container;
-    } else {
-      this.$scrollElement = $(window);
-    }
     this.options = $.extend({}, defaultOptions, options || {});
+    this.$scrollElement = $(this.options.container);
     this.$targets = $(this.options.targets);
     this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
+    // TODO move this around? If it's inside `process` we have to branch inside
+    // an event handler, which is almost as bad as a branch inside a loop. If
+    // it's above `process` then we don't know what's active.
+    this.options.start && this.options.start.call(this, this.$active);
   }
 
   // update the offsets cache and offset-to-target map, passed in by reference.
@@ -93,9 +89,9 @@ window.XScrollY = (function($, _) {
         $active = this.getActive();  // this.activeOffset gets set in here :(
     if (this.activeOffset != oldActiveOffset) {
       this.change($active);
-      this.$active = $active;
     }
     this.options.scroll && this.options.scroll.call(this, $active);
+    this.$active = $active;
   };
 
   // when target scope changes
@@ -166,8 +162,16 @@ window.XScrollY = (function($, _) {
   //   $targets       (default: undefined) Use a custom set of targets.
   //
   XScrollY.prototype.visible = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var scrollTop = this.$scrollElement.scrollTop(),
         scrollBottom = scrollTop + this.$scrollElement.height();
     return this.slice(scrollTop + this.options.offset + localOffset - bleed,
@@ -177,8 +181,15 @@ window.XScrollY = (function($, _) {
 
   // get all targets above
   XScrollY.prototype.above = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
     var origin = this.$scrollElement.scrollTop();
     return this.slice(0,
         origin + this.options.offset + localOffset + bleed,
@@ -187,8 +198,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets above origin + screen
   XScrollY.prototype.aboves = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(0,
@@ -198,8 +217,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets below
   XScrollY.prototype.below = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop();
     return this.slice(origin + this.options.offset + localOffset - bleed,
       Infinity,
@@ -208,8 +235,16 @@ window.XScrollY = (function($, _) {
 
   // get all targets below screen
   XScrollY.prototype.belows = function(localOffset, bleed, $targets) {
-    localOffset = localOffset || 0;
-    bleed = bleed || 0;
+    // re-interpret the arguments
+    if (typeof localOffset == "object" && localOffset.jquery) {
+      $targets = localOffset;
+      localOffset = 0;
+      bleed = 0;
+    } else {
+      localOffset = localOffset || 0;
+      bleed = bleed || 0;
+    }
+
     var origin = this.$scrollElement.scrollTop(),
         origins = origin + this.$scrollElement.height();
     return this.slice(origins + this.options.offset + localOffset - bleed,
