@@ -2,6 +2,11 @@ body {
   margin-bottom: 12em;
 }
 
+code {
+  background: #eee;
+  color: teal;
+}
+
 section {
   margin: 2em 0;
 }
