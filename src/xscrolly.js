@@ -132,7 +132,7 @@
     for (; i < n; ++i) {
       off = this.offsets[i];
       if (top <= off && off < bottom) {
-        $ret = $ret.add(this.$targets[i]);
+        $ret = $ret.add(this.offsetMap[off]);
       }
     }
     return $ret;
