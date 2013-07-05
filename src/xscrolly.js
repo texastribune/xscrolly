@@ -30,7 +30,7 @@
   }
     this.options = $.extend({}, defaultOptions, options || {});
     this.$targets = $(this.options.targets);
-    this.updateOffsets();  // TODO assert offsets are monotonic increasing
+    this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
     this.process();
@@ -46,6 +46,7 @@
       _offsets.push(offset);
       _map[offset].push(target);
     });
+    _offsets = _offsets.sort(function(a, b) { return a - b; });
   };
 
   // update target offset lookup
