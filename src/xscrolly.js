@@ -84,9 +84,9 @@ window.XScrollY = (function($, _) {
         $active = this.getActive();  // this.activeOffset gets set in here :(
     if (this.activeOffset != oldActiveOffset) {
       this.change($active);
-      this.$active = $active;
     }
     this.options.scroll && this.options.scroll.call(this, $active);
+    this.$active = $active;
   };
 
   // when target scope changes

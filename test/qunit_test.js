@@ -166,6 +166,32 @@ test('unveil is only called once', function() {
   equal(n_unveilFired, 3);
 });
 
+test('event callback args', function() {
+  var changeActive, changeOldActive,
+      unveilActive, unveilOldActive,
+      scrollActive, scrollOldActive;
+  xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+
+  equal(xsy.$active[0], xsy.$targets[0],
+    "the first target should be active");
+  xsy.option('change', function($el) { changeActive = $el; changeOldActive = this.$active; });
+  xsy.option('unveil', function($el) { unveilActive = $el; unveilOldActive = this.$active; });
+  xsy.option('scroll', function($el) { scrollActive = $el; scrollOldActive = this.$active; });
+  $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
+
+  equal(changeActive.text(), '3');
+  equal(changeOldActive.text(), '0');
+
+  equal(unveilActive.text(), '3');
+  equal(unveilOldActive.text(), '0');
+
+  equal(scrollActive.text(), '3');
+  equal(scrollOldActive.text(), '0');
+});
+
 
 module('target selection', {
   setup: function() {
