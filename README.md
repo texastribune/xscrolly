@@ -29,6 +29,7 @@ offset: 0,             // pixels from the top of the page to set the origin
 throttle: 200          // milliseconds to de-bounce the scroll event
 ```
 
+
 ## Events
 
 To actually do something, you have to set up at least one event callback.
@@ -51,7 +52,7 @@ Events are fired in this order:
 ### `unveil`
 
 Scroll has changed focus from one element to another for the first time.
-Example:
+Example ([demo][basic_demo]):
 
 ```JavaScript
 // mark target as read
@@ -62,7 +63,7 @@ function($el) {
 
 ### `change`
 
-Scroll has changed focus from one element to another. Example:
+Scroll has changed focus from one element to another. Example ([demo][basic_demo]):
 
 ```JavaScript
 // mark target as active
@@ -75,7 +76,7 @@ function($el) {
 ### `scroll`
 
 Captured a scroll event. This isn't that useful, but if you want a de-bounced
-scroll event listener, you can use this. Example:
+scroll event listener, you can use this. Example ([demo][lazyimg_demo]):
 
 
 ```JavaScript
@@ -87,7 +88,8 @@ function($el) {
 
 ### `start`
 
-Like an unveil for unveil. This is run the very first time. Example:
+Like an unveil for unveil. This is run the very first time. Example
+([demo][rows_demo]):
 
 ```JavaScript
 // outline all elements on the first screen
@@ -114,8 +116,9 @@ These are methods you can use on `this` inside the event callbacks:
 
 Arguments:
 
-  1. `offset`    Fudge the origin this many pixels down, stacks with `offset` option.
-  2. `bleed`     Fudge the boundaries out this many pixels.
+  1. `offset`    Fudge the origin this many pixels down, stacks with the global
+     `offset` option.
+  2. `bleed`     Fudge the boundaries outward this many pixels.
   3. `$targets`  Don't use the internal targets, define a new set.
 
 Usage:
@@ -129,18 +132,27 @@ visible($targets);
 ```
 
 
-## jquery-xscrolly.sj
+## jquery-xscrolly.js
 
 This can also be used as a jQuery plugin:
 
-    $('section').xscrolly({});
+    $('section').xscrolly(options);
 
-And the instance can be found on $(el).data('xscrolly');
+And the instance can be found on the `xscrolly` jQuery data:
+
+    var xsy = $('section').data('xscrolly');
 
 
 ## Live Demos
 
-* http://texastribune.github.io/xscrolly/examples/basic.html
-* http://texastribune.github.io/xscrolly/examples/lazyimg.html
-* http://texastribune.github.io/xscrolly/examples/offset.html
-* http://texastribune.github.io/xscrolly/examples/spy.html
+* [examples/basic.html][basic_demo]
+* [examples/lazyimg.html][lazyimg_demo]
+* [examples/offset.html][offset_demo]
+* [examples/rows.html][rows_demo]
+* [examples/spy.html][spy_demo]
+
+[basic_demo]: http://texastribune.github.io/xscrolly/examples/basic.html
+[lazyimg_demo]: http://texastribune.github.io/xscrolly/examples/lazyimg.html
+[offset_demo]: http://texastribune.github.io/xscrolly/examples/offset.html
+[rows_demo]: http://texastribune.github.io/xscrolly/examples/rows.html
+[spy_demo]: http://texastribune.github.io/xscrolly/examples/spy.html

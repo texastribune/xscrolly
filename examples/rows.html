@@ -112,7 +112,7 @@
 
     <style class="xray" contenteditable="true">
 .active {
-  outline: 2px dashed crimson;
+  outline: 2px dashed crimson !important;
 }
 
 .read {
@@ -127,10 +127,14 @@
 var zz = new XScrollY({
   targets: 'li',
   change: function($el) {
-    $('.active').removeClass('active');
+    this.$active.removeClass('active');
+    $el.addClass('active');
   },
   unveil: function($el) {
     $el.addClass('read');
+  },
+  start: function($el) {
+    this.visible($('*')).css('outline', '1px solid chartreuse');
   }
 });
     </script>

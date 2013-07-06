@@ -25,6 +25,7 @@ window.XScrollY = (function($, _) {
     this.options = $.extend({}, defaultOptions, options || {});
     this.$scrollElement = $(this.options.container);
     this.$targets = $(this.options.targets);
+    this.$active = $();
     this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
