@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Scroll Spy</title>
+    <title>Fixed Header</title>
     <link rel="stylesheet" href="examples.css">
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="#intro">intro</a></li>
-        <li><a href="#1">1</a></li>
-        <li><a href="#2">2</a></li>
-        <li><a href="#3">3</a></li>
-        <li><a href="#4">4</a></li>
-      </ul>
-    </nav>
+    <header>
+      <h1>H1 Heading</h1>
+      <nav>
+        <ul>
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#1">1</a></li>
+          <li><a href="#2">2</a></li>
+          <li><a href="#3">3</a></li>
+          <li><a href="#4">4</a></li>
+        </ul>
+      </nav>
+      <div id="i-am-lazy" class="cheat"></div>
+    </header>
     <section id="intro">
       <h2>Intro</h2>
       <p>
-        Trying to follow this scrollspy implementation as a rough guide:
-        https://github.com/twitter/bootstrap/blob/master/js/bootstrap-scrollspy.js
+
+        Here's how you can use this to do a fixed header. It's not as elegant as
+        a dedicated fixed positioning plugin, but gives you more control. For
+        example, this example shows how the fixed header can turn itself off at
+        the bottom of the page. You may need to come up with some creative
+        selectors or add cheater elements. There's definitely lots of ways to
+        skin this cat using <code>xcrolly</code>. This example is based on the
+        <a href="spy.html">scroll spy example</a>.
+
       </p>
     </section>
     <section id="1">
@@ -70,7 +81,7 @@
 
     <style class="xray" contenteditable="true">
 nav {
-  position: fixed;
+  height: 20px;
 }
 
 nav ul {
@@ -79,24 +90,38 @@ nav ul {
   padding: 0;
 }
 
+nav li {
+  background: darkcyan;
+  display: inline-block;
+  text-align: center;
+}
+
 nav a {
   display: block;
   width: 7em;
 }
 
-section {
-  margin-left: 8em;
+.fixed {
+  position: fixed;
+  top: 0;
+}
+
+.fixed + .cheat {
+  height: 20px;
 }
 
 .active {
   outline: 2px dashed crimson;
 }
 
+li.active {
+  background: cadetblue;
+}
+
 .read {
   color: #555;
 }
     </style>
-    <!-- use schema to support loading from file:// -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
     <script src="../src/xscrolly.js"></script>
@@ -104,7 +129,7 @@ section {
     <script class="xray">
 $('section').xscrolly({
   change: function($el) {
-    this.$active.removeClass('active');
+    $(this.$active).removeClass('active');
     $el.addClass('active');
 
     // scroll spy
@@ -113,6 +138,11 @@ $('section').xscrolly({
   },
   unveil: function($el) {
     $el.addClass('read');
+  }
+});
+$('body, nav, .xray').xscrolly({
+  change: function($el) {
+    $('nav').toggleClass('fixed', $el.is('nav'))
   }
 });
     </script>

@@ -146,12 +146,14 @@ And the instance can be found on the `xscrolly` jQuery data:
 ## Live Demos
 
 * [examples/basic.html][basic_demo]
+* [examples/fixed.html][fixed_header_demo]
 * [examples/lazyimg.html][lazyimg_demo]
 * [examples/offset.html][offset_demo]
 * [examples/rows.html][rows_demo]
 * [examples/spy.html][spy_demo]
 
 [basic_demo]: http://texastribune.github.io/xscrolly/examples/basic.html
+[fixed_header_demo]: http://texastribune.github.io/xscrolly/examples/fixed.html
 [lazyimg_demo]: http://texastribune.github.io/xscrolly/examples/lazyimg.html
 [offset_demo]: http://texastribune.github.io/xscrolly/examples/offset.html
 [rows_demo]: http://texastribune.github.io/xscrolly/examples/rows.html
