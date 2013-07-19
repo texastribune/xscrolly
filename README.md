@@ -158,3 +158,13 @@ And the instance can be found on the `xscrolly` jQuery data:
 [offset_demo]: http://texastribune.github.io/xscrolly/examples/offset.html
 [rows_demo]: http://texastribune.github.io/xscrolly/examples/rows.html
 [spy_demo]: http://texastribune.github.io/xscrolly/examples/spy.html
+
+
+## Similar libraries
+
+There's a similar jquery plugin called [`Waypoints`][waypoints]. The major
+difference is that `xscrolly` will always mark a target as active. For example,
+on page load, the top target in `xscrolly` will be active, but won't be active
+in `Waypoints` until you scroll to it.
+
+[waypoints]: http://imakewebthings.com/jquery-waypoints/

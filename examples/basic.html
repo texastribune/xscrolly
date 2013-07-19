@@ -67,6 +67,7 @@
     <script src="../src/xscrolly.js"></script>
     <script src="../src/jquery-wrapper.js"></script>
     <script class="xray">
+//* xscrolly.js
 $('section').xscrolly({
   change: function($el) {
     this.$active.removeClass('active');
@@ -76,6 +77,13 @@ $('section').xscrolly({
     $el.addClass('read');
   }
 });
+//*/
+/* waypoint equivalent (http://imakewebthings.com/jquery-waypoints/#get-started)
+$('section').waypoint(function(direction) {
+  $('section.active').removeClass('active');
+  $(this).addClass('read active');
+})
+//*/
     </script>
   </body>
 </html>
