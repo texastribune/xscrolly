@@ -20,10 +20,18 @@ module.exports = (grunt) ->
           'dist/jquery-<%= pkg.name %>.min.js': ['<%= concat.jqueryPlugin.dest %>']
     qunit:
       all: ['test/*.html']
+    jquerymanifest:
+      options:
+        source: grunt.file.readJSON 'package.json'
+        overrides:
+          dependencies:
+            jquery: '*'
+            underscore: '*'
 
 
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-qunit'
+  grunt.loadNpmTasks 'grunt-jquerymanifest'
 
-  grunt.registerTask 'default', ['qunit', 'concat', 'uglify']
+  grunt.registerTask 'default', ['qunit', 'concat', 'uglify', 'jquerymanifest']

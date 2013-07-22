@@ -1,0 +1,22 @@
+{
+  "name": "xscrolly",
+  "version": "0.3.0",
+  "title": "xscrolly",
+  "author": {
+    "name": "The Texas Tribune"
+  },
+  "licenses": [
+    {
+      "type": "Apache",
+      "url": "http://opensource.org/licenses/Apache"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "underscore": "*"
+  },
+  "description": "When `X` scrolls in, do `Y`",
+  "bugs": {
+    "url": "https://github.com/texastribune/xscrolly/issues"
+  }
+}
