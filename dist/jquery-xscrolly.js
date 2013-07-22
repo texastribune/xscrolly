@@ -1,4 +1,4 @@
-/* xscrolly - v0.3.0 - 2013-07-05 */
+/* xscrolly - v0.3.1 - 2013-07-22 */
 /*jshint expr:true*/
 
 // define(['jquery', 'underscore'], function($, _) {
@@ -26,6 +26,7 @@ window.XScrollY = (function($, _) {
     this.options = $.extend({}, defaultOptions, options || {});
     this.$scrollElement = $(this.options.container);
     this.$targets = $(this.options.targets);
+    this.$active = $();
     this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
