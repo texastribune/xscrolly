@@ -160,6 +160,12 @@ And the instance can be found on the `xscrolly` jQuery data:
 [spy_demo]: http://texastribune.github.io/xscrolly/examples/spy.html
 
 
+## Developing
+
+`xscrolly` uses grunt to build. For some reason, the qunit tests may not work
+from the command line. If that happens, you can bypass it with: `grunt build`.
+
+
 ## Similar libraries
 
 There's a similar jquery plugin called [`Waypoints`][waypoints]. The major

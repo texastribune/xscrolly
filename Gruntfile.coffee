@@ -35,3 +35,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-jquerymanifest'
 
   grunt.registerTask 'default', ['qunit', 'concat', 'uglify', 'jquerymanifest']
+  grunt.registerTask 'build', ['concat', 'uglify', 'jquerymanifest']
