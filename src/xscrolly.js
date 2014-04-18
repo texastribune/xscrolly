@@ -2,7 +2,7 @@
 
 // define(['jquery', 'underscore'], function($, _) {
 window.XScrollY = (function($, _) {
-  "use strict";
+  'use strict';
 
   var defaultOptions = {
     // setup options: these can only be set once
@@ -51,7 +51,6 @@ window.XScrollY = (function($, _) {
 
   // update target offset lookup
   XScrollY.prototype.updateOffsets = function() {
-    var self = this;
     this.offsets = [];
     this.offsetMap = {};
     this._updateOffsets(this.$targets, this.offsets, this.offsetMap);
@@ -163,7 +162,7 @@ window.XScrollY = (function($, _) {
   //
   XScrollY.prototype.visible = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -182,7 +181,7 @@ window.XScrollY = (function($, _) {
   // get all targets above
   XScrollY.prototype.above = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -199,7 +198,7 @@ window.XScrollY = (function($, _) {
   // get all targets above origin + screen
   XScrollY.prototype.aboves = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -218,7 +217,7 @@ window.XScrollY = (function($, _) {
   // get all targets below
   XScrollY.prototype.below = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -236,7 +235,7 @@ window.XScrollY = (function($, _) {
   // get all targets below screen
   XScrollY.prototype.belows = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;

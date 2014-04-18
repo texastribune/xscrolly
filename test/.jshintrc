@@ -1,0 +1,24 @@
+{
+    "browser": true,
+    "strict": false,
+    "globals": {
+        "QUnit": false,
+        "module": false,
+        "test": false,
+        "asyncTest": false,
+        "expect": false,
+        "start": false,
+        "stop": false,
+        // http://api.qunitjs.com/category/assert/
+        "deepEqual": false,
+        "equal": false,
+        "notDeepEqual": false,
+        "notEqual": false,
+        "notPropEqual": false,
+        "notStrictEqual": false,
+        "ok": false,
+        "propEqual": false,
+        "strictEqual": false,
+        "throws": false
+    }
+}

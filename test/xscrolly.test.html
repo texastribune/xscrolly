@@ -2,14 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Basic Test Suite</title>
-  <!-- Load local QUnit. -->
-  <link rel="stylesheet" href="libs/qunit.css" media="screen">
-  <script src="libs/qunit.js"></script>
-  <!-- Load local lib and tests. -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-  <script src="../src/xscrolly.js"></script>
+  <title>xscrolly.js</title>
+  <!-- QUnit -->
+  <link rel="stylesheet" href="libs/qunit.min.css" media="screen">
+  <script src="libs/qunit.min.js"></script>
+  <!-- override styles -->
   <style type="text/css">
     #qunit-fixture {
       left: 0;
@@ -33,11 +30,8 @@
   </style>
 </head>
 <body>
-  <h1 id="qunit-header">Basic Test Suite</h1>
-  <h2 id="qunit-banner"></h2>
-  <div id="qunit-testrunner-toolbar"></div>
-  <h2 id="qunit-userAgent"></h2>
-  <ol id="qunit-tests"></ol>
+  <div id="qunit"></div>
+
   <div id="qunit-fixture">
     <ul>
       <li>0</li>
@@ -78,6 +72,11 @@
       <li>Z</li>
     </ul>
   </div>
-  <script src="qunit_test.js"></script>
+  <!-- Dependencies -->
+  <script src="libs/jquery.min.js"></script>
+  <script src="libs/underscore-min.js"></script>
+  <!-- Library to test -->
+  <script src="../src/xscrolly.js"></script>
+  <script src="xscrolly.test.js"></script>
 </body>
 </html>

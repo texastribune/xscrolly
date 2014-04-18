@@ -1,9 +1,12 @@
+// qunit tests for xscrolly.js
 //
 // To fake scrolling in tests, do:
 //
 //     $container.scrollTop(TARGET_HEIGHT * 20); xsy.process();
 //
 // to bypass event handling and callback throttling.
+
+/* globals $, XScrollY */
 
 var $container,
     xsy,
@@ -38,9 +41,9 @@ test('change event fires', function() {
   });
 
   equal(xsy.$scrollElement.scrollTop(), 0,
-    "container should start scrolled to the top");
+    'container should start scrolled to the top');
   equal(xsy.$active[0], xsy.$targets[0],
-    "the first target should be active");
+    'the first target should be active');
   $container.scrollTop(TARGET_HEIGHT * 3);
   equal(xsy.$scrollElement.scrollTop(), TARGET_HEIGHT * 3);
   equal(n_changeFired, 1);
@@ -63,19 +66,19 @@ test('getActiveOffset', function() {
     targets: '#qunit-fixture li'
   });
   equal(xsy.activeOffset, TARGET_HEIGHT * 0,
-    "Scroll depth: " + $container.scrollTop());
+    'Scroll depth: ' + $container.scrollTop());
   $container.scrollTop(TARGET_HEIGHT / 2); xsy.process();
   equal(xsy.activeOffset, TARGET_HEIGHT * 0,
-    "Scroll depth: " + $container.scrollTop());
+    'Scroll depth: ' + $container.scrollTop());
   $container.scrollTop(TARGET_HEIGHT); xsy.process();
   equal(xsy.activeOffset, TARGET_HEIGHT,
-    "Scroll depth: " + $container.scrollTop());
+    'Scroll depth: ' + $container.scrollTop());
   $container.scrollTop(TARGET_HEIGHT * 2 - 1); xsy.process();
   equal(xsy.activeOffset, TARGET_HEIGHT,
-    "Scroll depth: " + $container.scrollTop());
+    'Scroll depth: ' + $container.scrollTop());
   $container.scrollTop(TARGET_HEIGHT * 2 + 1); xsy.process();
   equal(xsy.activeOffset, TARGET_HEIGHT * 2,
-    "Scroll depth: " + $container.scrollTop());
+    'Scroll depth: ' + $container.scrollTop());
 });
 
 test('scroll', function() {
@@ -110,12 +113,12 @@ test('active property is updated on scroll', function() {
   });
 
   equal(xsy.$scrollElement.scrollTop(), 0,
-    "container should start scrolled to the top");
+    'container should start scrolled to the top');
   equal(xsy.$active[0], xsy.$targets[0],
-    "the first target should be active");
+    'the first target should be active');
   $container.scrollTop(TARGET_HEIGHT * 3); xsy.process();
   equal(xsy.$active[0].innerHTML, xsy.$targets[3].innerHTML,
-    "the third target should be active");
+    'the third target should be active');
   equal(n_changeFired, 2);
 });
 
@@ -128,11 +131,11 @@ test('offset option works', function() {
   });
 
   equal($container.find('li').height(), TARGET_HEIGHT,
-    "TARGET_HEIGHT variable should be the same as <li> height for testing");
+    'TARGET_HEIGHT variable should be the same as <li> height for testing');
   equal(xsy.$scrollElement.scrollTop(), 0,
-    "container should start scrolled to the top");
+    'container should start scrolled to the top');
   equal(xsy.$active[0].innerHTML, xsy.$targets[3].innerHTML,
-    "the third target should be active");
+    'the third target should be active');
   equal(n_changeFired, 1);
 });
 
@@ -142,7 +145,7 @@ test('unveil is only called once', function() {
     container: $container,
     targets: '#qunit-fixture li',
     change: countChange,
-    unveil: function($e) {
+    unveil: function() {
       ++n_unveilFired;
     }
   });
@@ -190,7 +193,7 @@ test('event callback args', function() {
   });
 
   equal(xsy.$active[0], xsy.$targets[0],
-    "the first target should be active");
+    'the first target should be active');
   xsy.option('change', function($el) { changeActive = $el; changeOldActive = this.$active; });
   xsy.option('unveil', function($el) { unveilActive = $el; unveilOldActive = this.$active; });
   xsy.option('scroll', function($el) { scrollActive = $el; scrollOldActive = this.$active; });
@@ -218,7 +221,7 @@ module('target selection', {
 });
 
 test('slice -  slicing at the limits returns all', function() {
-  total = xsy.$targets.length;
+  var total = xsy.$targets.length;
   equal(xsy.slice(-Infinity, Infinity).length, total);
   equal(xsy.slice(0, Infinity).length, total);
 });
