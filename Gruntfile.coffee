@@ -39,3 +39,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', ['jshint', 'qunit', 'concat', 'uglify', 'jquerymanifest']
   grunt.registerTask 'build', ['default']
+  grunt.registerTask 'test', ['jshint', 'qunit']
