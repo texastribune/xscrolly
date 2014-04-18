@@ -33,6 +33,24 @@ module('basics', {
   }
 });
 
+test('_updateOffsets works', function() {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  var targets = $('#qunit-fixture li');
+  var offsets = [];
+  var map = {};
+  xsy._updateOffsets(targets, offsets, map);
+  // Assert the number of offsets should match the number of targets because our
+  // test targets are block elements and don't sit at the same scroll offset
+  equal(targets.length, offsets.length);
+  // Assert there should be only one element in the '0' offset
+  equal(map[0].length, 1);
+  // Assert the first element in the map is also the first target
+  equal(map[0][0], targets[0]);
+});
+
 test('change event fires', function() {
   var xsy = new XScrollY({
     container: $container,
