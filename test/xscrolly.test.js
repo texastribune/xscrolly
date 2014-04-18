@@ -83,6 +83,11 @@ test('updateOffsets works', function() {
   equal(map[0][0], targets[0]);
 });
 
+test('update works', function() {
+  // ugh, so lazy. WISHLIST assert things were called using sinon
+  expect(0);
+});
+
 test('change event fires', function() {
   var xsy = new XScrollY({
     container: $container,

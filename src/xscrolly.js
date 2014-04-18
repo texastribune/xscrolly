@@ -61,6 +61,12 @@ window.XScrollY = (function($, _) {
     this._updateOffsets(this.$targets, this.offsets, this.offsetMap);
   };
 
+  // convenience method to update targets and offsets
+  XScrollY.prototype.update = function() {
+    this.updateTargets();
+    this.updateOffsets();
+  };
+
   // get the active offset for the current scroll depth
   XScrollY.prototype.getActiveOffset = function() {
     var scrollTop = this.$scrollElement.scrollTop() + this.options.offset,
