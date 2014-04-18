@@ -33,6 +33,18 @@ module('basics', {
   }
 });
 
+test('updateTargets works', function () {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  // clear out existing targets
+  xsy.$targets = [];
+  xsy.updateTargets();
+  // assert the `.$targets` property contains all the fixture LIs
+  equal(xsy.$targets.length, $('#qunit-fixture li').length);
+});
+
 test('_updateOffsets works', function() {
   var xsy = new XScrollY({
     container: $container,

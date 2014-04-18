@@ -24,8 +24,8 @@ window.XScrollY = (function($, _) {
     this._seen = [];
     this.options = $.extend({}, defaultOptions, options || {});
     this.$scrollElement = $(this.options.container);
-    this.$targets = $(this.options.targets);
     this.$active = $();
+    this.updateTargets();
     this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
@@ -35,6 +35,11 @@ window.XScrollY = (function($, _) {
     // it's above `process` then we don't know what's active.
     this.options.start && this.options.start.call(this, this.$active);
   }
+
+  // get targets and offsets
+  XScrollY.prototype.updateTargets = function() {
+    this.$targets = $(this.options.targets);
+  };
 
   // update the offsets cache and offset-to-target map, passed in by reference.
   XScrollY.prototype._updateOffsets = function($target, _offsets, _map) {
