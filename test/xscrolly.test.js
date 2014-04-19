@@ -45,6 +45,18 @@ test('updateTargets works', function () {
   equal(xsy.$targets.length, $('#qunit-fixture li').length);
 });
 
+test('updateTargets finds new targets', function () {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  var old_target_count = xsy.$targets.length;
+  $('<li>WHEEEE</li>').appendTo($('#qunit-fixture'));
+  xsy.updateTargets();
+  // assert the `.$targets` property contains all the fixture LIs
+  equal(xsy.$targets.length, old_target_count + 1);
+});
+
 test('_updateOffsets works', function() {
   var xsy = new XScrollY({
     container: $container,
