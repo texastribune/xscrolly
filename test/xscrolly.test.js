@@ -33,6 +33,73 @@ module('basics', {
   }
 });
 
+test('updateTargets works', function () {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  // clear out existing targets
+  xsy.$targets = [];
+  xsy.updateTargets();
+  // assert the `.$targets` property contains all the fixture LIs
+  equal(xsy.$targets.length, $('#qunit-fixture li').length);
+});
+
+test('updateTargets finds new targets', function () {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  var old_target_count = xsy.$targets.length;
+  $('<li>WHEEEE</li>').appendTo($('#qunit-fixture'));
+  xsy.updateTargets();
+  // assert the `.$targets` property contains all the fixture LIs
+  equal(xsy.$targets.length, old_target_count + 1);
+});
+
+test('_updateOffsets works', function() {
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  var targets = $('#qunit-fixture li');
+  var offsets = [];
+  var map = {};
+  xsy._updateOffsets(targets, offsets, map);
+  // Assert the number of offsets should match the number of targets because our
+  // test targets are block elements and don't sit at the same scroll offset
+  equal(targets.length, offsets.length);
+  // Assert there should be only one element in the '0' offset
+  equal(map[0].length, 1);
+  // Assert the first element in the map is also the first target
+  equal(map[0][0], targets[0]);
+});
+
+test('updateOffsets works', function() {
+  // This is the same as _updateOffsets above except we take advantage of the
+  // variables .updateOffsets builds for us.
+  var xsy = new XScrollY({
+    container: $container,
+    targets: '#qunit-fixture li'
+  });
+  var targets = $('#qunit-fixture li');
+  var offsets = xsy.offsets;
+  var map = xsy.offsetMap;
+  xsy.updateOffsets();
+  // Assert the number of offsets should match the number of targets because our
+  // test targets are block elements and don't sit at the same scroll offset
+  equal(targets.length, offsets.length);
+  // Assert there should be only one element in the '0' offset
+  equal(map[0].length, 1);
+  // Assert the first element in the map is also the first target
+  equal(map[0][0], targets[0]);
+});
+
+test('update works', function() {
+  // ugh, so lazy. WISHLIST assert things were called using sinon
+  expect(0);
+});
+
 test('change event fires', function() {
   var xsy = new XScrollY({
     container: $container,

@@ -1,9 +1,9 @@
-/* xscrolly - v0.3.1 - 2013-07-22 */
+/* xscrolly - v0.4.0 - 2014-04-21 */
 /*jshint expr:true*/
 
 // define(['jquery', 'underscore'], function($, _) {
 window.XScrollY = (function($, _) {
-  "use strict";
+  'use strict';
 
   var defaultOptions = {
     // setup options: these can only be set once
@@ -25,8 +25,8 @@ window.XScrollY = (function($, _) {
     this._seen = [];
     this.options = $.extend({}, defaultOptions, options || {});
     this.$scrollElement = $(this.options.container);
-    this.$targets = $(this.options.targets);
     this.$active = $();
+    this.updateTargets();
     this.updateOffsets();
     this.$scrollElement.on('scroll.xscrolly',
       _.throttle(function() { self.process.call(self); }, this.options.throttle));
@@ -36,6 +36,11 @@ window.XScrollY = (function($, _) {
     // it's above `process` then we don't know what's active.
     this.options.start && this.options.start.call(this, this.$active);
   }
+
+  // get targets and offsets
+  XScrollY.prototype.updateTargets = function() {
+    this.$targets = $(this.options.targets);
+  };
 
   // update the offsets cache and offset-to-target map, passed in by reference.
   XScrollY.prototype._updateOffsets = function($target, _offsets, _map) {
@@ -52,10 +57,15 @@ window.XScrollY = (function($, _) {
 
   // update target offset lookup
   XScrollY.prototype.updateOffsets = function() {
-    var self = this;
     this.offsets = [];
     this.offsetMap = {};
     this._updateOffsets(this.$targets, this.offsets, this.offsetMap);
+  };
+
+  // convenience method to update targets and offsets
+  XScrollY.prototype.update = function() {
+    this.updateTargets();
+    this.updateOffsets();
   };
 
   // get the active offset for the current scroll depth
@@ -164,7 +174,7 @@ window.XScrollY = (function($, _) {
   //
   XScrollY.prototype.visible = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -183,7 +193,7 @@ window.XScrollY = (function($, _) {
   // get all targets above
   XScrollY.prototype.above = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -200,7 +210,7 @@ window.XScrollY = (function($, _) {
   // get all targets above origin + screen
   XScrollY.prototype.aboves = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -219,7 +229,7 @@ window.XScrollY = (function($, _) {
   // get all targets below
   XScrollY.prototype.below = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
@@ -237,7 +247,7 @@ window.XScrollY = (function($, _) {
   // get all targets below screen
   XScrollY.prototype.belows = function(localOffset, bleed, $targets) {
     // re-interpret the arguments
-    if (typeof localOffset == "object" && localOffset.jquery) {
+    if (typeof localOffset === 'object' && localOffset.jquery) {
       $targets = localOffset;
       localOffset = 0;
       bleed = 0;
